@@ -11,7 +11,7 @@ class ApiController extends Controller
     public function getAllStudents(){
         $students = Student::get();
 
-        return response()->json(["students" => $students], 201);
+        return response()->json($students, 201);
     }
 
     public function createStudent(Request $request){
