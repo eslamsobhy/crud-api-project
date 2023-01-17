@@ -56,6 +56,17 @@ class ApiController extends Controller
     }
 
     public function deleteStudent($id){
-        // logic
+        if(Student::where("id", $id)->exists()){
+            $student = Student::find($id);
+            $student->delete();
+
+            return response()->json([
+                "message" => "Record deleted successfully"
+            ], 202);
+        }else{
+            return response()->json([
+                "message" => "Record not found!"
+            ], 404);
+        }
     }
 }
