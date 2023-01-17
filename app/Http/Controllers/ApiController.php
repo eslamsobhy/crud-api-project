@@ -38,7 +38,21 @@ class ApiController extends Controller
     }
 
     public function updateStudent(Request $request, $id){
-        // logic
+        if(Student::where("id", $id)->exists()){
+            $student = Student::find($id);
+            // we could also use is_null()
+            $student->name = $request->name? $request->name : $student->name;
+            $student->course = $request->course? $request->course : $student->course;
+            $student->save();
+
+            return response()->json([
+                "message" => "Record updated successfully",
+            ], 200);
+        }else{
+            return response()->json([
+                "message" => "Record not found!"
+            ], 404);
+        }
     }
 
     public function deleteStudent($id){
