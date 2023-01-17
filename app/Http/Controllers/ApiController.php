@@ -9,7 +9,9 @@ use App\Models\Student;
 class ApiController extends Controller
 {
     public function getAllStudents(){
-        // logic
+        $students = Student::get();
+
+        return response()->json(["students" => $students], 201);
     }
 
     public function createStudent(Request $request){
